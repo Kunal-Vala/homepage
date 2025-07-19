@@ -1,2 +1,442 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* Basic Resets and Typography */
+:root {
+    --primary-blue: #007bff;
+    --light-grey: #f4f4f4;
+    --dark-grey: #333;
+    --text-color: #555;
+    --header-bg-color: #e0f2f7; /* Light blue for the header background */
+    --footer-bg-color: #2c3e50; /* Darker blue for the footer background */
+    --white: #fff;
 
+    /* Project card background colors from your design */
+    --card-red-bg: #d9534f; /* Matches red in the image */
+    --card-purple-bg: #8e44ad; /* Matches purple in the image */
+    --card-green-bg: #5cb85c; /* Matches green in the image */
+    --card-pink-bg: #e83e8c; /* Matches pink in the image */
+    --card-orange-bg: #f0ad4e; /* Matches orange in the image */
+    --card-blue-bg: #007bff; /* Matches blue in the image */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4 {
+    color: var(--dark-grey);
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: var(--white); /* For Kunal Vala name in header */
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    color: var(--dark-grey); /* For project names */
+}
+
+h4 {
+    font-size: 1.8em;
+    margin-bottom: 0.8em;
+    color: var(--white); /* For contact me title */
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-blue);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Removes extra space below images */
+}
+
+/* Header Section */
+.top-section {
+    background-color: var(--header-bg-color);
+    padding-bottom: 80px; /* Space for the wave effect */
+    position: relative;
+    overflow: hidden; /* For the diagonal cut */
+}
+
+.top-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Height of the diagonal cut */
+    background: var(--white); /* Color of the section below */
+    transform: skewY(-3deg); /* Adjust the angle for the diagonal cut */
+    transform-origin: bottom left;
+    z-index: 1;
+}
+
+.header-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    padding-top: 50px;
+    position: relative;
+    z-index: 2; /* Ensure content is above the pseudo-element */
+}
+
+.profile-card {
+    flex: 0 0 300px; /* Fixed width for the image container */
+    height: 350px; /* Fixed height to match the image aspect in the design */
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px; /* Slightly rounded corners for the image container */
+}
+
+.profile-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
+    border-radius: 8px;
+}
+
+.profile-card h1 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.about-section {
+    flex: 1;
+    min-width: 300px; /* Ensures it doesn't get too small */
+}
+
+.about-section h2 {
+    color: var(--dark-grey);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links img {
+    width: 28px;
+    height: 28px;
+    filter: invert(30%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(50%) contrast(100%); /* Dark grey for social icons in header */
+}
+
+/* My Work Section */
+.my-work-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: var(--white);
+    position: relative;
+    z-index: 0;
+}
+
+.my-work-section h2 {
+    color: var(--dark-grey);
+    margin-bottom: 40px;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.work-card {
+    background-color: var(--light-grey);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.work-card a {
+    color: inherit; /* Inherit color from parent for consistency */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make the anchor fill the card */
+}
+
+.work-image-wrapper {
+    height: 180px; /* Fixed height for image area */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensures image doesn't overflow */
+    background-color: #ccc; /* Default placeholder background */
+}
+
+.work-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area, cropping if necessary */
+}
+
+/* Specific background colors for work cards using the image area */
+.work-card.color-red .work-image-wrapper { background-color: var(--card-red-bg); }
+.work-card.color-purple .work-image-wrapper { background-color: var(--card-purple-bg); }
+.work-card.color-green .work-image-wrapper { background-color: var(--card-green-bg); }
+.work-card.color-pink .work-image-wrapper { background-color: var(--card-pink-bg); }
+.work-card.color-orange .work-image-wrapper { background-color: var(--card-orange-bg); }
+.work-card.color-blue .work-image-wrapper { background-color: var(--card-blue-bg); }
+
+
+.card-details {
+    padding: 20px;
+    text-align: left;
+    flex-grow: 1; /* Allows details to take remaining height */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-details h3 {
+    color: var(--dark-grey); /* Project name color in cards */
+}
+
+.card-details p {
+    font-size: 0.9em;
+    color: var(--text-color);
+    flex-grow: 1; /* Allows paragraph to take available space */
+}
+
+.card-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.card-links img {
+    width: 20px;
+    height: 20px;
+    filter: invert(30%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(50%) contrast(100%); /* Dark grey for social icons in cards */
+}
+
+/* Contact Section (Footer) */
+.contact-section {
+    background-color: var(--footer-bg-color);
+    color: var(--white);
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden; /* For the diagonal cut */
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Height of the diagonal cut */
+    background: var(--white); /* Color of the section above */
+    transform: skewY(-3deg); /* Adjust the angle for the diagonal cut */
+    transform-origin: top right;
+    z-index: 1;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 2; /* Ensure content is above the pseudo-element */
+    margin-top: 100px;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.contact-info p {
+    margin-bottom: 0.5em;
+}
+
+.contact-info .social-links img {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%); /* White for social icons in footer */
+}
+
+.contact-image {
+    flex: 0 0 350px; /* Fixed width for the image */
+    height: 350px; /* Fixed height to match the design */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ========================================= */
+/* Media Queries for Responsiveness */
+/* ========================================= */
+
+/* Tablet devices (e.g., up to 1024px or 768px for portrait tablets) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 15px; /* Slightly less padding */
+    }
+
+    .header-content, .footer-content {
+        gap: 30px; /* Reduce gap */
+    }
+
+    .profile-card {
+        flex: 0 0 250px; /* Smaller fixed width for profile image */
+        height: 300px;
+    }
+
+    .about-section, .contact-info {
+        min-width: 250px; /* Adjust min-width for content */
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust min-width for cards */
+        gap: 20px; /* Reduce gap between cards */
+    }
+
+    .work-image-wrapper {
+        height: 150px; /* Smaller height for project images */
+    }
+
+    .contact-image {
+        flex: 0 0 300px; /* Smaller fixed width for contact image */
+        height: 300px;
+    }
+
+    .top-section::after, .contact-section::before {
+        height: 80px; /* Slightly smaller diagonal cut */
+    }
+}
+
+/* Mobile devices (e.g., up to 767px or 480px for larger phones) */
+@media (max-width: 767px) {
+    h1 {
+        font-size: 2em; /* Smaller font for main heading */
+    }
+
+    h2 {
+        font-size: 1.8em; /* Smaller font for section headings */
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    h4 {
+        font-size: 1.6em;
+    }
+
+    .container {
+        padding: 10px; /* More padding on very small screens */
+    }
+
+    /* Stack sections vertically */
+    .header-content, .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-card, .contact-image {
+        width: 80%; /* Make images take more width, but not full */
+        max-width: 250px; /* Limit their maximum size */
+        height: 280px; /* Adjust height */
+        margin: 0 auto; /* Center the images */
+    }
+
+    .profile-card {
+        margin-bottom: 20px; /* Add space below profile image */
+    }
+
+    .about-section, .contact-info {
+        min-width: unset; /* Remove min-width constraint */
+        width: 100%; /* Take full width */
+    }
+
+    .social-links {
+        justify-content: center; /* Center social icons */
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr; /* Single column for projects on mobile */
+        gap: 25px; /* Adjust gap */
+    }
+
+    .work-image-wrapper {
+        height: 160px; /* Adjust height for mobile project images */
+    }
+
+    .top-section::after, .contact-section::before {
+        height: 60px; /* Smaller diagonal cut for mobile */
+        transform: skewY(-2deg); /* Slightly less aggressive angle */
+    }
+}
+
+/* Small mobile devices (e.g., up to 480px) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.6em;
+    }
+    h3 {
+        font-size: 1.2em;
+    }
+    h4 {
+        font-size: 1.4em;
+    }
+
+    .profile-card, .contact-image {
+        max-width: 200px; /* Even smaller max width for very small screens */
+        height: 230px;
+    }
+
+    .card-details p {
+        font-size: 0.85em; /* Slightly smaller text for project descriptions */
+    }
+
+    .work-image-wrapper {
+        height: 140px; /* Smaller height for project images on very small screens */
+    }
+
+    .top-section::after, .contact-section::before {
+        height: 40px; /* Even smaller diagonal cut */
+        transform: skewY(-1.5deg); /* Less aggressive angle */
+    }
+}
